@@ -1,0 +1,163 @@
+
+        :root {
+            --bg: #6c3465;
+            --card-bg: #361348;
+            --accent: #572e7a;
+            --accent-hover: #6f3e9a;
+            --text: #f1f1f6;
+            --muted: #9d9db3;
+            --error: #ff6b6b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        header {
+            background: var(--card-bg);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 5.5rem;
+            margin: 0;
+            padding: 1rem 2rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .calculadora {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .calculadora h1 {
+            margin-top: 0;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .campo {
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        label {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        input, select {
+            padding: 0.6rem 0.75rem;
+            border-radius: 8px;
+            border: 1px solid #44445a;
+            background: #bd639f;
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border: none;
+            border-radius: 8px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        button:hover {
+            background: var(--accent-hover);
+        }
+
+        .fila-suma {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .fila-suma input {
+            flex: 1;
+        }
+
+        .fila-suma .btn-quitar {
+            width: auto;
+            margin-top: 0;
+            padding: 0 0.75rem;
+            background: var(--error);
+        }
+
+        .btn-agregar {
+            background: transparent;
+            border: 1px dashed var(--muted);
+            color: var(--text);
+        }
+
+        .btn-agregar:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .resultado {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            background: #52024e;
+            min-height: 1.2rem;
+            text-align: center;
+            font-size: 1.1rem;
+            word-break: break-word;
+        }
+
+        .resultado.error {
+            color: var(--error);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }

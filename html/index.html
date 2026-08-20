@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Calculadora</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">➕Suma</a></li>
+                <li><a href="#">➖Resta</a></li>
+                <li><a href="#">✖️Multiplicación</a></li>
+                <li><a href="#">➗División</a></li>
+                <li><a href="#"><span style="color: blueviolet;">//</span> Division entera</a></li>
+                <li><a href="#"><span style="color: blueviolet;">%</span> Modulo</a></li>
+                <li><a href="#"><span style="color: rgb(114, 23, 199);">**</span>Potencia</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="calculadora">
+            <h1>Calculadora</h1>
+            <form id="form-calculadora">
+                <div class="campo">
+                    <label for="opcion">Operación</label>
+                    <select id="opcion" name="opcion">
+                        <option value="1">Suma</option>
+                        <option value="2">Resta</option>
+                        <option value="3">Multiplicación</option>
+                        <option value="4">División</option>
+                        <option value="5">División entera</option>
+                        <option value="6">Módulo</option>
+                        <option value="7">Potencia</option>
+                    </select>
+                </div>
+                <div class="campo" id="campo-num1">
+                    <label for="num1">Primer número</label>
+                    <input type="number" id="num1" name="num1" required>
+                </div>
+                <div class="campo" id="campo-num2">
+                    <label for="num2">Segundo número</label>
+                    <input type="number" id="num2" name="num2" required>
+                </div>
+                <div class="campo" id="campo-suma">
+                    <label>Números a sumar</label>
+                    <div id="lista-suma"></div>
+                    <button type="button" id="btn-agregar-numero" class="btn-agregar">+ Agregar número</button>
+                </div>
+                <button type="submit">Calcular</button>
+            </form>
+            <div id="resultado" class="resultado"></div>
+        </div>
+    </main>
+    <footer>Basado en ejercicio1.py</footer>
+
+    <script>
+        // Misma lógica de ejercicio1.py, traducida a JavaScript para poder ejecutarse en el navegador.
+        function calcular(opcion, num1, num2) {
+            switch (opcion) {
+                case 2:
+                    return { texto: "La resta es: " + (num1 - num2) };
+                case 3:
+                    return { texto: "La multiplicación es: " + (num1 * num2) };
+                case 4:
+                    if (num2 === 0) return { texto: "No se puede dividir entre 0", error: true };
+                    return { texto: "La división es: " + (num1 / num2) };
+                case 5:
+                    if (num2 === 0) return { texto: "No se puede dividir entre 0", error: true };
+                    return { texto: "La división entera es: " + Math.floor(num1 / num2) };
+                case 6:
+                    if (num2 === 0) return { texto: "No se puede dividir entre 0", error: true };
+                    return { texto: "El módulo es: " + (num1 % num2) };
+                case 7:
+                    return { texto: "La potencia es: " + (num1 ** num2) };
+                default:
+                    return { texto: "Opción no válida", error: true };
+            }
+        }
+
+        const listaSuma = document.getElementById("lista-suma");
+        const campoNum1 = document.getElementById("campo-num1");
+        const campoNum2 = document.getElementById("campo-num2");
+        const campoSuma = document.getElementById("campo-suma");
+        const num1Input = document.getElementById("num1");
+        const num2Input = document.getElementById("num2");
+
+        function crearFilaSuma() {
+            const fila = document.createElement("div");
+            fila.className = "fila-suma";
+
+            const input = document.createElement("input");
+            input.type = "number";
+            input.className = "num-suma";
+            input.required = true;
+
+            const btnQuitar = document.createElement("button");
+            btnQuitar.type = "button";
+            btnQuitar.className = "btn-quitar";
+            btnQuitar.textContent = "×";
+            btnQuitar.addEventListener("click", function () {
+                if (listaSuma.children.length > 1) {
+                    fila.remove();
+                }
+            });
+
+            fila.appendChild(input);
+            fila.appendChild(btnQuitar);
+            listaSuma.appendChild(fila);
+        }
+
+        document.getElementById("btn-agregar-numero").addEventListener("click", crearFilaSuma);
+
+        // Empieza con dos campos para sumar, igual que las demás operaciones.
+        crearFilaSuma();
+        crearFilaSuma();
+
+        function actualizarCampos() {
+            const esSuma = document.getElementById("opcion").value === "1";
+
+            campoNum1.style.display = esSuma ? "none" : "flex";
+            campoNum2.style.display = esSuma ? "none" : "flex";
+            campoSuma.style.display = esSuma ? "flex" : "none";
+
+            num1Input.required = !esSuma;
+            num2Input.required = !esSuma;
+        }
+
+        document.getElementById("opcion").addEventListener("change", actualizarCampos);
+        actualizarCampos();
+
+        document.getElementById("form-calculadora").addEventListener("submit", function (evento) {
+            evento.preventDefault();
+
+            const opcion = parseInt(document.getElementById("opcion").value, 10);
+            const resultadoDiv = document.getElementById("resultado");
+
+            if (opcion === 1) {
+                const numeros = Array.from(document.querySelectorAll(".num-suma"))
+                    .map(input => parseInt(input.value, 10));
+
+                if (numeros.some(Number.isNaN)) {
+                    resultadoDiv.textContent = "Ingrese números válidos";
+                    resultadoDiv.classList.add("error");
+                    return;
+                }
+
+                const suma = numeros.reduce((acumulado, actual) => acumulado + actual, 0);
+                resultadoDiv.textContent = "La suma es: " + suma;
+                resultadoDiv.classList.remove("error");
+                return;
+            }
+
+            const num1 = parseInt(num1Input.value, 10);
+            const num2 = parseInt(num2Input.value, 10);
+
+            if (Number.isNaN(num1) || Number.isNaN(num2)) {
+                resultadoDiv.textContent = "Ingrese números válidos";
+                resultadoDiv.classList.add("error");
+                return;
+            }
+
+            const { texto, error } = calcular(opcion, num1, num2);
+            resultadoDiv.textContent = texto;
+            resultadoDiv.classList.toggle("error", !!error);
+        });
+    </script>
+</body>
+</html>
