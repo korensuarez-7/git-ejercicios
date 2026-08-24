@@ -1,1 +1,1 @@
-input(int("Ingrese su edad"))
+input(int("Please enter a number: "))
