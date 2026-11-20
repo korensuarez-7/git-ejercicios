@@ -1,0 +1,16 @@
+# Archivos que Python genera solo (no se suben a GitHub)
+__pycache__/
+*.pyc
+
+# Entorno virtual
+.venv/
+venv/
+
+# Configuración local del editor / sistema
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Configuración local de Claude Code
+.claude/settings.local.json

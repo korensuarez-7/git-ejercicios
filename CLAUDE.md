@@ -8,12 +8,14 @@ This is a small collection of standalone learning exercises ("Ejercicios"), not 
 
 ## Structure
 
-- `Python/ejercicio1.py` — a command-line calculator. Prompts for an operation (1-7: suma, resta, multiplicación, división, división entera, módulo, potencia) and two numbers, then prints the result. Guards division/modulo by zero.
+Python exercises are grouped by topic under `python/NN_tema/` (numbered in learning order); complete programs go in `python/proyectos/`. File names: lowercase snake_case, numbered (`01_...`), no hyphens or accents, and never shadowing stdlib module names (e.g. no `string.py`).
+
+- `python/proyectos/calculadora/calculadora.py` — a command-line calculator. Prompts for an operation (1-7: suma, resta, multiplicación, división, división entera, módulo, potencia) and two numbers, then prints the result. Guards division/modulo by zero.
 - `html/index.html` + `html/styles.css` — a browser version of the same calculator. The calculation logic (`calcular()`) lives inline in a `<script>` tag at the bottom of `index.html`, mirroring the Python `if/elif` branches. The "Suma" option is special-cased in the UI to allow summing an arbitrary list of numbers (dynamically added rows) rather than just two.
 
 ## Running the exercises
 
-- Python exercise: `python Python\ejercicio1.py` (interactive prompts on stdin).
+- Python exercise: `python python\proyectos\calculadora\calculadora.py` (interactive prompts on stdin).
 - HTML exercise: open `html/index.html` directly in a browser (no server or build step needed).
 
 ## Conventions to preserve when editing

@@ -1,1 +1,0 @@
-input(int("Please enter a number: "))
